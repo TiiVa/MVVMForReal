@@ -9,13 +9,16 @@ public class MainWindowViewModel : ObservableObject
     private readonly IDataManager _dataManager;
 
     private readonly DataModel _dataModel;
-
-    private int _counter;
-
+    
     public int Counter
     {
-        get => _counter;
-        set => SetProperty(ref _counter, value);
+        get => _dataModel.Counter;
+        set => 
+            SetProperty(
+                _dataModel.Counter, 
+                value, _dataModel, 
+                (model, value)=> model.Counter = value
+                );
     }
 
     public MainWindowViewModel(IDataManager dataManager)

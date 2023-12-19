@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:MVVMForReal"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:MVVMForReal.ViewModels"
+    xmlns:views="clr-namespace:MVVMForReal.Views"
     Title="MainWindow"
     Width="800"
     Height="450"
@@ -13,6 +14,14 @@
     FontSize="30"
     mc:Ignorable="d">
     <Grid>
-        <TextBlock Text="{Binding Counter, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewModels:LeftViewModel}">
+                <views:LeftView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CenterViewModel}">
+                <views:CenterView />
+            </DataTemplate>
+        </Grid.Resources>
+        <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>

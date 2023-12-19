@@ -22,9 +22,12 @@ namespace MVVMForReal
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<IDataManager, DataManager>();
+                    services.AddScoped<IDataManager, DataManager>();
+                    services.AddScoped<INavigationManager, NavigationManager>();
 
                     services.AddViewModelFactory<MainWindowViewModel>();
+                    services.AddViewModelFactory<LeftViewModel>();
+                    services.AddViewModelFactory<CenterViewModel>();
 
                     services.AddSingleton<MainWindow>();
                 })

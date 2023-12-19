@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVVMForReal.Extensions;
 using MVVMForReal.Managers;
 using MVVMForReal.ViewModels;
 
@@ -23,7 +24,7 @@ namespace MVVMForReal
                 {
                     services.AddSingleton<IDataManager, DataManager>();
 
-
+                    services.AddViewModelFactory<MainWindowViewModel>();
 
                     services.AddSingleton<MainWindow>();
                 })
@@ -35,10 +36,7 @@ namespace MVVMForReal
             await AppHost.StartAsync();
 
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = 
-                new MainWindowViewModel(
-                    AppHost.Services.GetRequiredService<IDataManager>()
-                    );
+            mainWindow.DataContext = AppHost.Services.GetRequiredService<MainWindowViewModel>();
 
             mainWindow.Show();
 
